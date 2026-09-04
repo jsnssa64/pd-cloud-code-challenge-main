@@ -1,0 +1,13 @@
+@host = http://localhost:9001
+
+### Get product by id
+GET {{host}}/products/P100
+
+### Get product by unknown id (expect 404)
+GET {{host}}/products/UNKNOWN
+
+### Search products
+GET {{host}}/products?search=Stella
+
+### Search with no results
+GET {{host}}/products?search=doesnotexist

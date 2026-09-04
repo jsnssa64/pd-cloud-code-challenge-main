@@ -1,22 +1,28 @@
-﻿using PerfectDraft.Product.Infrastructure.Infrastructure;
+﻿using Microsoft.Extensions.Options;
+using PerfectDraft.Product.Infrastructure.Configuration;
+using PerfectDraft.Product.Infrastructure.Infrastructure;
 using PerfectDraft.Product.Infrastructure.Model;
+using System.Text.Json;
 
 namespace PerfectDraft.Product.Infrastructure.Repository
 {
-    public class ProductRepository(IJsonFileLoader jsonFileLoader) : IProductRepository
+    public class ProductRepository(IJsonFileLoader jsonFileLoader, IOptions<DataFileOptions> DataFileOptions) : IProductRepository
     {
-        public const string BasePath = "./Data/";
-        public const string ProductFileName = "magento-products.json";
-        public const string SearchFileName = "search-products.json";
-
         public async Task<IEnumerable<MagentoProductModel>> GetProducts(CancellationToken cancellationToken)
         {
-            return await jsonFileLoader.ReadAllJsonFileAsync<MagentoProductModel>(BasePath + ProductFileName, cancellationToken: cancellationToken);
+            return await jsonFileLoader.ReadAllJsonFileAsync<MagentoProductModel>(DataFileOptions.Value.MagentoProductsPath, cancellationToken: cancellationToken);
         }
 
         public async Task<IEnumerable<SearchProductModel>> GetSearchProducts(CancellationToken cancellationToken)
         {
-            return await jsonFileLoader.ReadAllJsonFileAsync<SearchProductModel>(BasePath + ProductFileName, cancellationToken: cancellationToken);
+            try
+            {
+                return await jsonFileLoader.ReadAllJsonFileAsync<SearchProductModel>(DataFileOptions.Value.SearchProductsPath, cancellationToken: cancellationToken);
+            }
+            catch (Exception ex) when (ex is JsonException or IOException)
+            {
+                return Enumerable.Empty<SearchProductModel>();
+            }
         }
     }
 }

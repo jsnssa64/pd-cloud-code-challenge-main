@@ -8,7 +8,7 @@ namespace PerfectDraft.Product.Shared.ValidatorConfiguration
     {
         public static void RegisterDTOValidators(this IServiceCollection Services)
         {
-            Services.AddValidatorsFromAssemblyContaining(typeof(ProductSkuValidator).Assembly.GetType());
+            Services.AddValidatorsFromAssemblyContaining(typeof(ProductSkuValidator));
         }
     }
 }

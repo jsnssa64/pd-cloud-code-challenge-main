@@ -11,6 +11,8 @@ builder.Services.RegisterDTOValidators();
 
 builder.Services.RegisterServices();
 
+builder.Services.RegisterRepositories();
+
 var app = builder.Build();
 
 

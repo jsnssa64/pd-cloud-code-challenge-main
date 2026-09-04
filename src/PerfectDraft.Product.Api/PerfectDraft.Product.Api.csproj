@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="12.1.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\PerfectDraft.Product.Shared\PerfectDraft.Product.Shared.csproj" />
+    <ProjectReference Include="..\..\Service\PerfectDraft.Product.Service.csproj" />
+  </ItemGroup>
+</Project>

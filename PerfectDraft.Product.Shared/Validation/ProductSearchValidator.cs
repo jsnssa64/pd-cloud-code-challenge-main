@@ -3,7 +3,7 @@ using PerfectDraft.Product.Shared.DTO;
 
 namespace PerfectDraft.Product.Shared.Validation
 {
-    public class ProductSearchValidator : AbstractValidator<SearchTermDTO>
+    public class ProductSearchValidator : AbstractValidator<ProductSearchTermDTO>
     {
         public ProductSearchValidator()
         {

@@ -1,15 +1,41 @@
-﻿using PerfectDraft.Product.Shared.DTO;
+﻿using Microsoft.Extensions.Logging;
+using PerfectDraft.Product.Infrastructure.Repository;
+using PerfectDraft.Product.Shared.DTO;
 
 namespace PerfectDraft.Product.Service.Product;
-public class ProductService : IProductService
+public class ProductService(ILogger<ProductService> Logger, IProductRepository ProductRepository) : IProductService
 {
-    public Task GetProduct(ProductSkuDTO sku)
+    public async Task<ProductDTO?> GetProduct(ProductSkuDTO Sku, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var products = await ProductRepository.GetProducts(cancellationToken);
+            var searchProducts = await ProductRepository.GetSearchProducts(cancellationToken);
+
+        }
+        catch (Exception ex)
+        {
+            //  Do not Block just Return empty object
+            Logger.LogError(ex, "");
+        }
+
+        return null;
     }
 
-    public Task SearchProduct()
+    public async Task<ProductDTO?> SearchProduct(ProductSearchTermDTO searchTerm, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var products = await ProductRepository.GetProducts(cancellationToken);
+            var searchProducts = await ProductRepository.GetSearchProducts(cancellationToken);
+
+        }
+        catch (Exception ex)
+        {
+            //  Do not Block just Return empty object
+            Logger.LogError(ex, "");
+        }
+
+        return null;
     }
 }

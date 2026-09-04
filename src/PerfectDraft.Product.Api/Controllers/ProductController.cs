@@ -1,6 +1,5 @@
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
-using PerfectDraft.Product.Api.DTO;
 using PerfectDraft.Product.Service.Product;
 using PerfectDraft.Product.Shared.DTO;
 using System.Threading;
@@ -16,8 +15,11 @@ public sealed class ProductController(
     IProductService Service) : ControllerBase
 {
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetById(string id, CancellationToken cancellationToken)
+    public async Task<IActionResult> GetById(string? id, CancellationToken cancellationToken)
     {
+        if(id is  null)
+            return BadRequest();
+
         var Sku = new ProductSkuDTO(id);
         var result = await ProductSkuValidator.ValidateAsync(Sku, cancellationToken);
 
@@ -38,19 +40,15 @@ public sealed class ProductController(
             return NotFound();
         }
 
-        var response = new ProductResponse(
-                new ProductSkuResponse(product.Sku.Sku),
-                new ProductMetaDataResponse(product.Name, product.Url),
-                new PriceResponse(product.Price, product.Currency),
-                product.InStock);
-             
-
-        return Ok(response);
+        return Ok(product);
     }
 
     [HttpGet]
     public async Task<IActionResult> Search([FromQuery] string? search, CancellationToken cancellationToken)
     {
+        if(search is null)
+            return BadRequest();
+
         var searchTermDTO = new ProductSearchTermDTO(search);
         var result = await ProductSearchTermValidator.ValidateAsync(searchTermDTO, cancellationToken);
 
@@ -66,23 +64,6 @@ public sealed class ProductController(
 
         var product = await Service.SearchProduct(searchTermDTO, cancellationToken);
 
-        if (product is null)
-        {
-            return NotFound();
-        }
-
-        var response = new ProductResponse(
-                new ProductSkuResponse(product.Sku.Sku),
-                new ProductMetaDataResponse(product.Name, product.Url),
-                new PriceResponse(product.Price, product.Currency),
-                product.InStock);
-
-        return Ok(response);
+        return Ok(product);
     }
-
-    //return StatusCode(StatusCodes.Status501NotImplemented, new
-    //{
-    //    message = "Implement product aggregation for GET /products/{id}.",
-    //    requestedId = id
-    //});
 }

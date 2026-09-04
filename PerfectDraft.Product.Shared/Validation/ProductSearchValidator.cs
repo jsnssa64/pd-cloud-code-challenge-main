@@ -3,16 +3,22 @@ using PerfectDraft.Product.Shared.DTO;
 
 namespace PerfectDraft.Product.Shared.Validation
 {
+    public static class SearchTermErrorMessage
+    {
+        public const string Empty = "Please specify Search Terms";
+        public const string Length = "Invalid Search Term Length";
+    }
+
     public class ProductSearchValidator : AbstractValidator<ProductSearchTermDTO>
     {
         public ProductSearchValidator()
         {
             RuleFor(x => x.Search)
                 .NotEmpty()
-                .WithMessage("Please specify Search Terms");
+                .WithMessage(SearchTermErrorMessage.Empty);
             RuleFor(x => x.Search)
                 .Length(1, 250)
-                .WithMessage("Search Term has reached the Maximum Length 250 or Minimum 1");
+                .WithMessage(SearchTermErrorMessage.Length);
         }
     }
 }

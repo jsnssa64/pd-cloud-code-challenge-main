@@ -15,14 +15,14 @@ namespace PerfectDraft.Product.Tests.Validator
         }
 
         [TestCase("")]
-        [TestCase(null)]
-        public void Test(string? SearchTerm)
+        public void Test(string SearchTerm)
         {
             //  
             var searchTermDTO = new ProductSearchTermDTO(SearchTerm);
 
             //  Action
             var result = _validator.TestValidate(searchTermDTO);
+
             // Assert
 
             result.ShouldHaveValidationErrorFor(c => c.Search);

@@ -5,16 +5,19 @@ using PerfectDraft.Product.Shared.ValidatorConfiguration;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddProblemDetails();
+
 builder.Services.AddControllers();
 
 builder.Services.RegisterDTOValidators();
 
 builder.Services.RegisterServices();
 
-builder.Services.RegisterRepositories();
+builder.Services.RegisterRepositories(builder.Configuration);
 
 var app = builder.Build();
 
+app.UseExceptionHandler();
 
 app.UseAuthorization();
 

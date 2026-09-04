@@ -19,7 +19,7 @@ namespace PerfectDraft.Product.Tests.Validator
         public void Test(string? SearchTerm)
         {
             //  
-            var searchTermDTO = new SearchTermDTO(SearchTerm);
+            var searchTermDTO = new ProductSearchTermDTO(SearchTerm);
 
             //  Action
             var result = _validator.TestValidate(searchTermDTO);

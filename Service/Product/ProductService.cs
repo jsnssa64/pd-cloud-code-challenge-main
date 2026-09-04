@@ -41,7 +41,7 @@ public class ProductService(IProductRepository ProductRepository) : IProductServ
         await Task.WhenAll(getProducts, searchProducts);
 
 
-        var searchTerms = searchTerm.Search.Split(' ', StringSplitOptions.TrimEntries);
+        var searchTerms = searchTerm.Search.Split(' ', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
 
         var filteredProducts = getProducts.Result
             .Where(product => searchTerms.Any(term => product.Name.Contains(term, StringComparison.OrdinalIgnoreCase)));

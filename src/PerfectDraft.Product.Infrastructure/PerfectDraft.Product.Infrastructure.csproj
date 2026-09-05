@@ -14,4 +14,9 @@
     <PackageReference Include="System.IO.Abstractions" Version="22.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PerfectDraft.Product.Service\PerfectDraft.Product.Service.csproj" />
+    <ProjectReference Include="..\PerfectDraft.Product.Shared\PerfectDraft.Product.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

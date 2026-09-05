@@ -1,6 +1,6 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
-namespace PerfectDraft.Product.Infrastructure.Model
+namespace PerfectDraft.Product.Shared.Model
 {
     public class SearchProductModel
     {
@@ -10,7 +10,7 @@ namespace PerfectDraft.Product.Infrastructure.Model
         public required string Image { get; set; }
 
         public required string Title { get; set; }
-        
+
         public decimal Price { get; set; }
 
         public bool InStock { get; set; }

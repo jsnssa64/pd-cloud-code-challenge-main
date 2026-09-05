@@ -1,4 +1,4 @@
-﻿using PerfectDraft.Product.Infrastructure.Repository;
+﻿using PerfectDraft.Product.Service.Repository;
 using PerfectDraft.Product.Shared.DTO;
 
 namespace PerfectDraft.Product.Service.Product;

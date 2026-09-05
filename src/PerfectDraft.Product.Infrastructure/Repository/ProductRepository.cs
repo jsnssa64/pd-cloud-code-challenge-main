@@ -1,7 +1,8 @@
-﻿using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Options;
 using PerfectDraft.Product.Infrastructure.Configuration;
 using PerfectDraft.Product.Infrastructure.Infrastructure;
-using PerfectDraft.Product.Infrastructure.Model;
+using PerfectDraft.Product.Service.Repository;
+using PerfectDraft.Product.Shared.Model;
 using System.Text.Json;
 
 namespace PerfectDraft.Product.Infrastructure.Repository

@@ -1,6 +1,6 @@
-﻿using PerfectDraft.Product.Infrastructure.Model;
+using PerfectDraft.Product.Shared.Model;
 
-namespace PerfectDraft.Product.Infrastructure.Repository
+namespace PerfectDraft.Product.Service.Repository
 {
     public interface IProductRepository
     {

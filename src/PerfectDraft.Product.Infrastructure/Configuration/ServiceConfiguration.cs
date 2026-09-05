@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using PerfectDraft.Product.Infrastructure.Infrastructure;
 using PerfectDraft.Product.Infrastructure.Repository;
+using PerfectDraft.Product.Service.Repository;
 using System.IO.Abstractions;
 
 namespace PerfectDraft.Product.Infrastructure.Configuration

@@ -1,9 +1,9 @@
 ﻿using AutoFixture;
 using Moq;
-using PerfectDraft.Product.Infrastructure.Model;
-using PerfectDraft.Product.Infrastructure.Repository;
 using PerfectDraft.Product.Service.Product;
+using PerfectDraft.Product.Service.Repository;
 using PerfectDraft.Product.Shared.DTO;
+using PerfectDraft.Product.Shared.Model;
 
 namespace PerfectDraft.Product.Test.Service
 {

@@ -1,4 +1,4 @@
-﻿namespace PerfectDraft.Product.Infrastructure.Model
+namespace PerfectDraft.Product.Shared.Model
 {
     public class MagentoProductModel
     {

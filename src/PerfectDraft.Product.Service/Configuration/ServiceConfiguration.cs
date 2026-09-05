@@ -1,15 +1,12 @@
-﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using PerfectDraft.Product.Infrastructure.Configuration;
 using PerfectDraft.Product.Service.Product;
 
 namespace PerfectDraft.Product.Service.Configuration
 {
     public static class ServiceConfiguration
     {
-        public static void RegisterServices(this IServiceCollection Services, IConfiguration configuration)
+        public static void RegisterServices(this IServiceCollection Services)
         {
-            Services.RegisterRepositories(configuration);
             Services.AddSingleton<IProductService, ProductService>();
         }
     }

@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PerfectDraft.Product.Infrastructure\PerfectDraft.Product.Infrastructure.csproj" />
     <ProjectReference Include="..\PerfectDraft.Product.Shared\PerfectDraft.Product.Shared.csproj" />
   </ItemGroup>
 </Project>

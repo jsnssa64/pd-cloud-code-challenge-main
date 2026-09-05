@@ -8,6 +8,7 @@
     <PackageReference Include="FluentValidation" Version="12.1.1" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PerfectDraft.Product.Infrastructure\PerfectDraft.Product.Infrastructure.csproj" />
     <ProjectReference Include="..\PerfectDraft.Product.Service\PerfectDraft.Product.Service.csproj" />
     <ProjectReference Include="..\PerfectDraft.Product.Shared\PerfectDraft.Product.Shared.csproj" />
   </ItemGroup>

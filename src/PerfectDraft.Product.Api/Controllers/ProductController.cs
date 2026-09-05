@@ -26,7 +26,7 @@ public sealed class ProductController(
         if(!result.IsValid)
         {
             return 
-                ValidationProblem(
+                UnprocessableEntity(
                     new ValidationProblemDetails(
                         result.ToDictionary()
                         )
@@ -55,7 +55,7 @@ public sealed class ProductController(
         if (!result.IsValid)
         {
             return
-                ValidationProblem(
+                UnprocessableEntity(
                     new ValidationProblemDetails(
                         result.ToDictionary()
                         )

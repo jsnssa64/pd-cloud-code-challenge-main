@@ -6,7 +6,7 @@ using PerfectDraft.Product.Api.Controllers;
 using PerfectDraft.Product.Service.Product;
 using PerfectDraft.Product.Shared.DTO;
 
-namespace PerfectDraft.Product.Test
+namespace PerfectDraft.Product.Test.Controller
 {
     [TestFixture]
     public class ProductControllerTests
@@ -28,7 +28,7 @@ namespace PerfectDraft.Product.Test
         }
 
         [Test]
-        public async Task GetById_FluentValidationFails_Status400WithProblemDetails()
+        public async Task GetById_FluentValidationFails_Status422WithProblemDetails()
         {
             mockSkuValidator.Setup(sku => sku.ValidateAsync(It.IsAny<ProductSkuDTO>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(new ValidationResult([new ValidationFailure("Sku", "Invalid SKU")]));
@@ -37,7 +37,7 @@ namespace PerfectDraft.Product.Test
             var result = await productController.GetById("ValidSKU", new CancellationToken());
 
             var validationResult = (ObjectResult)result;
-            Assert.That(validationResult.StatusCode, Is.EqualTo(400));
+            Assert.That(validationResult.StatusCode, Is.EqualTo(422));
             Assert.That(validationResult.Value, Is.InstanceOf<ValidationProblemDetails>());
 
             var problemDetails = (ValidationProblemDetails)validationResult.Value;

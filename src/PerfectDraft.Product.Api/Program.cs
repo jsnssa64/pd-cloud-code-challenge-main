@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using PerfectDraft.Product.Api.Configuration;
+using PerfectDraft.Product.Service.Configuration;
 using PerfectDraft.Product.Shared.ValidatorConfiguration;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,9 +11,7 @@ builder.Services.AddControllers();
 
 builder.Services.RegisterDTOValidators();
 
-builder.Services.RegisterServices();
-
-builder.Services.RegisterRepositories(builder.Configuration);
+builder.Services.RegisterServices(builder.Configuration);
 
 var app = builder.Build();
 

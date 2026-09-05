@@ -13,7 +13,7 @@ namespace PerfectDraft.Product.Shared.Validation
     }
     public class ProductSkuValidator : AbstractValidator<ProductSkuDTO>
     {
-        public const string ProductPrefix = "P";
+        public static readonly string[] ProductPrefix = new[] { "P", "M" };
         public ProductSkuValidator()
         {
             RuleFor(x => x.Sku)
@@ -25,7 +25,7 @@ namespace PerfectDraft.Product.Shared.Validation
                 .WithMessage(SkuErrorMessage.Length);
 
             RuleFor(x => x.Sku)
-                .Must(value => value.StartsWith(ProductPrefix))
+                .Must(value => ProductPrefix.Any(p => value.StartsWith(p, StringComparison.OrdinalIgnoreCase)))
                 .WithMessage(SkuErrorMessage.Invalid);
         }
     }

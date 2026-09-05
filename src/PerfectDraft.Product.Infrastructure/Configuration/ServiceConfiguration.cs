@@ -1,11 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using PerfectDraft.Product.Infrastructure.Configuration;
 using PerfectDraft.Product.Infrastructure.Infrastructure;
 using PerfectDraft.Product.Infrastructure.Repository;
 using System.IO.Abstractions;
 
-namespace PerfectDraft.Product.Api.Configuration
+namespace PerfectDraft.Product.Infrastructure.Configuration
 {
     public static class ServiceConfiguration
     {

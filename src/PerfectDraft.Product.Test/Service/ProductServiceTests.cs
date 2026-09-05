@@ -23,7 +23,7 @@ namespace PerfectDraft.Product.Test.Service
         }
 
         [Test]
-        public async Task GetProduct_ValidEntry_Successful()
+        public async Task GetProduct_ValidMagentaWithInvalidSearchProduct_Successful()
         {
             var Sku = fixture.Create<ProductSkuDTO>();
             var magentoProductList = fixture.
@@ -39,6 +39,10 @@ namespace PerfectDraft.Product.Test.Service
 
             productRepository.Setup(repo => repo.GetProducts(It.IsAny<CancellationToken>()))
                 .ReturnsAsync(magentoProductList);
+
+
+            productRepository.Setup(repo => repo.GetSearchProducts(It.IsAny<CancellationToken>()))
+                .ReturnsAsync(Enumerable.Empty<SearchProductModel>());
 
             var result = await productService.GetProduct(Sku, new CancellationToken());
 

@@ -13,7 +13,7 @@ namespace PerfectDraft.Product.Shared.Validation
     }
     public class ProductSkuValidator : AbstractValidator<ProductSkuDTO>
     {
-        public static readonly string[] ProductPrefix = new[] { "P", "M" };
+        private static readonly string[] ProductPrefix = new[] { "P", "M" };
         public ProductSkuValidator()
         {
             RuleFor(x => x.Sku)

@@ -38,19 +38,17 @@ public class ProductService(IProductRepository ProductRepository) : IProductServ
         var getProducts = ProductRepository.GetProducts(cancellationToken);
         var searchProducts = ProductRepository.GetSearchProducts(cancellationToken);
 
-        await Task.WhenAll(getProducts, searchProducts);
-
-
         var searchTerms = searchTerm.Search.Split(' ', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+
+        await Task.WhenAll(getProducts, searchProducts);
 
         var filteredProducts = getProducts.Result
             .Where(product => searchTerms.Any(term => product.Name.Contains(term, StringComparison.OrdinalIgnoreCase)));
 
-        var searchProductsResults = await searchProducts;
-
         return filteredProducts.Select(product =>
         {
-            var productMetaData = searchProductsResults.FirstOrDefault(sproduct => string.Equals(sproduct.Sku, product.Sku, StringComparison.Ordinal));
+            //  Future note turn this to a dictionary for O(1) lookups
+            var productMetaData = searchProducts.Result.FirstOrDefault(sproduct => string.Equals(sproduct.Sku, product.Sku, StringComparison.Ordinal));
             
             return new ProductDTO(
                 new ProductSkuDTO(product.Sku),

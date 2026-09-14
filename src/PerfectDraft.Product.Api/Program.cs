@@ -20,8 +20,6 @@ var app = builder.Build();
 
 app.UseExceptionHandler();
 
-app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();

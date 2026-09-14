@@ -4,7 +4,7 @@ using PerfectDraft.Product.Shared.DTO;
 namespace PerfectDraft.Product.Service.Product;
 public class ProductService(IProductRepository ProductRepository) : IProductService
 {
-    public async Task<ProductDTO?> GetProduct(ProductSkuDTO Sku, CancellationToken cancellationToken)
+    public async Task<ProductDTO?> GetProductAsync(ProductSkuDTO Sku, CancellationToken cancellationToken)
     {
         var getProducts = ProductRepository.GetProducts(cancellationToken);
         var searchProducts = ProductRepository.GetSearchProducts(cancellationToken);
@@ -32,7 +32,7 @@ public class ProductService(IProductRepository ProductRepository) : IProductServ
             );
     }
 
-    public async Task<IEnumerable<ProductDTO>> SearchProduct(ProductSearchTermDTO searchTerm, CancellationToken cancellationToken)
+    public async Task<IEnumerable<ProductDTO>> SearchProductAsync(ProductSearchTermDTO searchTerm, CancellationToken cancellationToken)
     {
      
         var getProducts = ProductRepository.GetProducts(cancellationToken);
@@ -43,11 +43,11 @@ public class ProductService(IProductRepository ProductRepository) : IProductServ
         await Task.WhenAll(getProducts, searchProducts);
 
         var filteredProducts = getProducts.Result
-            .Where(product => searchTerms.Any(term => product.Name.Contains(term, StringComparison.OrdinalIgnoreCase)));
+            .Where(product => searchTerms.Any(term => product.Name.Normalize().Contains(term.Normalize(), StringComparison.OrdinalIgnoreCase)));
 
         return filteredProducts.Select(product =>
         {
-            //  Future note turn this to a dictionary for O(1) lookups
+            //  Future note turn this to a dictionary for O(1) lookups / Caching look up
             var productMetaData = searchProducts.Result.FirstOrDefault(sproduct => string.Equals(sproduct.Sku, product.Sku, StringComparison.Ordinal));
             
             return new ProductDTO(

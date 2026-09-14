@@ -33,7 +33,7 @@ public sealed class ProductController(
                     );
         }
 
-        var product = await Service.GetProduct(Sku, cancellationToken);
+        var product = await Service.GetProductAsync(Sku, cancellationToken);
 
         if (product is null)
         {
@@ -62,7 +62,7 @@ public sealed class ProductController(
                     );
         }
 
-        var product = await Service.SearchProduct(searchTermDTO, cancellationToken);
+        var product = await Service.SearchProductAsync(searchTermDTO, cancellationToken);
 
         return Ok(product);
     }

@@ -44,7 +44,7 @@ namespace PerfectDraft.Product.Test.Service
             productRepository.Setup(repo => repo.GetSearchProducts(It.IsAny<CancellationToken>()))
                 .ReturnsAsync(Enumerable.Empty<SearchProductModel>());
 
-            var result = await productService.GetProduct(Sku, new CancellationToken());
+            var result = await productService.GetProductAsync(Sku, new CancellationToken());
 
             Assert.That(result, Is.Not.Null);
             Assert.That(result.Sku.Sku, Is.EqualTo(Sku.Sku));
@@ -80,8 +80,8 @@ namespace PerfectDraft.Product.Test.Service
             productRepository.Setup(repo => repo.GetSearchProducts(It.IsAny<CancellationToken>()))
                 .ReturnsAsync(searchProductList);
 
-            var result = await productService.SearchProduct(searchTermDTO, CancellationToken.None);
-
+            var result = await productService.SearchProductAsync(searchTermDTO, CancellationToken.None);
+            
             Assert.That(result, Is.Not.Null);
             Assert.That(result, 
                 Has.One.Matches<ProductDTO>(p =>
@@ -114,7 +114,7 @@ namespace PerfectDraft.Product.Test.Service
             productRepository.Setup(repo => repo.GetSearchProducts(It.IsAny<CancellationToken>()))
                 .ReturnsAsync(searchProductList);
 
-            var result = await productService.SearchProduct(searchTermDTO, CancellationToken.None);
+            var result = await productService.SearchProductAsync(searchTermDTO, CancellationToken.None);
 
             Assert.That(result, Is.Empty);
         }
@@ -131,7 +131,7 @@ namespace PerfectDraft.Product.Test.Service
             productRepository.Setup(repo => repo.GetProducts(It.IsAny<CancellationToken>()))
                 .ReturnsAsync(magentoProductList);
 
-            var result = await productService.GetProduct(Sku, new CancellationToken());
+            var result = await productService.GetProductAsync(Sku, new CancellationToken());
 
             Assert.That(result, Is.Null);
         }

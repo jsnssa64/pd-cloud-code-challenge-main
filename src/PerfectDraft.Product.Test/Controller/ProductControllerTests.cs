@@ -52,7 +52,7 @@ namespace PerfectDraft.Product.Test.Controller
                 .ReturnsAsync(new ValidationResult());
 
             mockProductService
-                .Setup(productService => productService.GetProduct(It.IsAny<ProductSkuDTO>(), CancellationToken.None))
+                .Setup(productService => productService.GetProductAsync(It.IsAny<ProductSkuDTO>(), CancellationToken.None))
                 .ReturnsAsync((ProductDTO?)null);
 
             var result = await productController.GetById("ValidSKU", new CancellationToken());
